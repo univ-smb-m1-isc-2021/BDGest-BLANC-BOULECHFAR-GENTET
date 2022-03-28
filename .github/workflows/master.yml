@@ -25,7 +25,7 @@ jobs:
       #          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t BDGest-BLANC-BOULECHFAR-GENTET .
+        run: docker build -t bdgest_blanc_boulechfar_gentet .
 
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
@@ -33,5 +33,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: univ-smb-m1-isc-2021/BDGest-BLANC-BOULECHFAR-GENTET/main
+          repository: univ-smb-m1-isc-2021/bdgest_blanc_boulechfar_gentet/main
           tags: latest
