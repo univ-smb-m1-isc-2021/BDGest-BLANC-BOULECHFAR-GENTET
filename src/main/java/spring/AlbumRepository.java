@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AlbumRepository {
 
-    List<Album> getListAlbum();
-    void addAlbum(Album album);
+    public List<Album> getListAlbum();
+    public void addAlbum(Album album);
 
 }
