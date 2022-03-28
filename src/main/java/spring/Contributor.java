@@ -4,7 +4,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 
-@Entity public class Contributor extends AbstractPersistable<Long> {
+@Entity
+public class Contributor extends AbstractPersistable<Long> {
 
     // Attributs
 
