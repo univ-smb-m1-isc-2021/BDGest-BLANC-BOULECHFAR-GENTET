@@ -4,6 +4,7 @@ import "./Menu.css"
 export default function Menu() {
     return (
         <header>
+            <img src="./book.png"/>
             <h1 id="title">BDGest</h1>
             <ul id="listeLiens">
                 <li><a>Accueil</a></li>
