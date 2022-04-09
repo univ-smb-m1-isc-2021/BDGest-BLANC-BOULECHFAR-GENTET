@@ -9,14 +9,16 @@ import java.util.ArrayList;
 public class Initializer {
 
     private final AlbumRepository albumRepository;
+    private final UserRepository userRepository;
 
-    public Initializer(AlbumRepository albumRepository){
+    public Initializer(AlbumRepository albumRepository, UserRepository userRepository){
         this.albumRepository = albumRepository;
+        this.userRepository = userRepository;
     }
 
     @PostConstruct
     public void initialize(){
-        if (albumRepository.findAll().isEmpty()){
+        if (albumRepository.findAll().isEmpty()) {
             albumRepository.saveAndFlush(new Album("2-8001-0108-3",
                     "Les Schtroumpfs noirs",
                     "https://www.bedetheque.com/media/Couvertures/schtroumpfs01_333.jpg",
@@ -28,6 +30,12 @@ public class Initializer {
                     "https://www.bedetheque.com/media/Couvertures/schtroumpfscou02.jpg",
                     "Les schtroumpfs",
                     "2",
+                    new ArrayList<>()));
+        }
+        if (userRepository.findAll().isEmpty()) {
+            userRepository.saveAndFlush(new User("poupi",
+                    "zer",
+                    "administrateur",
                     new ArrayList<>()));
         }
     }
