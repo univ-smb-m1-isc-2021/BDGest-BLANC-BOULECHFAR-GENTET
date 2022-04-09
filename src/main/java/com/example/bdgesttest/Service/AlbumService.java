@@ -20,6 +20,10 @@ public class AlbumService {
         return albumRepository.findAll();
     }
 
+    public Album getAlbum(String isbn) {
+        return albumRepository.findByIsbn(isbn);
+    }
+
     public void addAlbum(String isbn, String title, String img, String serie, String num_serie, List<Contributor> contributorsList) {
         if (!albumRepository.existsById(isbn)) {
             albumRepository.save(new Album(isbn, title, img, serie, num_serie, contributorsList));
