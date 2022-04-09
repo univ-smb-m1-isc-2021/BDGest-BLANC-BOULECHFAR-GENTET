@@ -1,4 +1,4 @@
-package spring;
+package com.example.bdgesttest.spring;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

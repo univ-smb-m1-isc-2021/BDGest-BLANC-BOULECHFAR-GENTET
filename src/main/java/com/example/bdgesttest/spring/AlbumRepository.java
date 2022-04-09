@@ -1,7 +1,4 @@
-package spring;
-
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+package com.example.bdgesttest.spring;
 
 import java.util.List;
 

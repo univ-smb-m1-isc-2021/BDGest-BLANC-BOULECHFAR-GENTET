@@ -1,4 +1,4 @@
-package spring;
+package com.example.bdgesttest.spring;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -41,6 +41,14 @@ public class Contributor extends AbstractPersistable<Long> {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Contributor {\n" +
+                "name = "+this.name+"\n" +
+                "role = "+this.role+"\n" +
+                "}";
     }
 
 }

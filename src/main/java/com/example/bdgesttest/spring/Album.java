@@ -1,4 +1,4 @@
-package spring;
+package com.example.bdgesttest.spring;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -81,6 +81,18 @@ import java.util.ArrayList;
 
     public void setContributorsList(ArrayList<Contributor> contributorsList) {
         this.contributorsList = contributorsList;
+    }
+
+    @Override
+    public String toString() {
+        return "Album {\n" +
+                "   isbn = "+this.isbn+"\n" +
+                "   title = "+this.title+"\n" +
+                "   img = "+this.img+"\n" +
+                "   serie = "+this.serie+"\n" +
+                "   num_serie = "+this.num_serie+"\n" +
+                "   contributorsList = "+this.contributorsList+"\n" +
+                "}";
     }
 
 }
