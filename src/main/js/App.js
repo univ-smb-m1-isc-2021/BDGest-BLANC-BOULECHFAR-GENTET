@@ -1,8 +1,12 @@
 import React from 'react';
+import './App.css';
+import Menu from "./components/Menu/Menu.js";
 
 function App() {
   return (
-    <h1>BDGest</h1>
+    <div class="mainDiv">
+      <Menu />
+    </div>
   );
 }
 

@@ -5,7 +5,6 @@ import com.example.bdgesttest.persistence.AlbumRepository;
 import com.example.bdgesttest.persistence.Contributor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +20,7 @@ public class AlbumService {
         return albumRepository.findAll();
     }
 
-    public void addAlbum(String isbn, String title, String img, String serie, String num_serie, ArrayList<Contributor> contributorsList) {
+    public void addAlbum(String isbn, String title, String img, String serie, String num_serie, List<Contributor> contributorsList) {
         if (!albumRepository.existsById(isbn)) {
             albumRepository.save(new Album(isbn, title, img, serie, num_serie, contributorsList));
         }

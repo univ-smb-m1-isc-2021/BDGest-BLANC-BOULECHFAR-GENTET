@@ -2,6 +2,7 @@ package com.example.bdgesttest.persistence;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Album {
@@ -15,11 +16,11 @@ public class Album {
     private String serie;
     private String num_serie;
     @OneToMany
-    private ArrayList<Contributor> contributorsList;
+    private List<Contributor> contributorsList;
 
     // Constructeurs
 
-    public Album(String isbn, String title, String img, String serie, String num_serie, ArrayList<Contributor> contributorsList) {
+    public Album(String isbn, String title, String img, String serie, String num_serie, List<Contributor> contributorsList) {
         this.isbn = isbn;
         this.title = title;
         this.img = img;
@@ -72,11 +73,11 @@ public class Album {
         this.num_serie = num_serie;
     }
 
-    public ArrayList<Contributor> getContributorsList() {
+    public List<Contributor> getContributorsList() {
         return this.contributorsList;
     }
 
-    public void setContributorsList(ArrayList<Contributor> contributorsList) {
+    public void setContributorsList(List<Contributor> contributorsList) {
         this.contributorsList = contributorsList;
     }
 

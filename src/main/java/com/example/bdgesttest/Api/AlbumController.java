@@ -24,13 +24,13 @@ public class AlbumController {
     }
 
     @GetMapping(value = "/api/getAllAlbums")
-    public List<Album> getAllAlbums(){
+    public List<Album> getAllAlbums() {
         logger.info("Service getAlllbums");
         return new ArrayList<>(albumService.getAllAlbums());
     }
 
     @GetMapping(value = "/api/addAlbum")
-    public void addAlbum(String isbn, String title, String img, String serie, String num_serie, ArrayList<Contributor> contributorsList){
+    public void addAlbum(String isbn, String title, String img, String serie, String num_serie, ArrayList<Contributor> contributorsList) {
         logger.info("Service addAlbum");
         albumService.addAlbum(isbn, title, img, serie, num_serie, contributorsList);
     }
