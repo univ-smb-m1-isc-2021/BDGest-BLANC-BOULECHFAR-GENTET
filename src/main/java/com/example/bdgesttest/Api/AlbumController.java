@@ -6,6 +6,7 @@ import com.example.bdgesttest.persistence.Contributor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -27,6 +28,12 @@ public class AlbumController {
     public List<Album> getAllAlbums() {
         logger.info("Service getAlllbums");
         return new ArrayList<>(albumService.getAllAlbums());
+    }
+
+    @GetMapping(value = "/api/getAlbum")
+    public Album getAlbum(@RequestParam String isbn){
+        logger.info("Service getAlbum");
+        return albumService.getAlbum(isbn);
     }
 
     @GetMapping(value = "/api/addAlbum")
