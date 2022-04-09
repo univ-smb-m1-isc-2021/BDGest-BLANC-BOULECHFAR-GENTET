@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 @Service
 public class Initializer {
+
     private final AlbumRepository albumRepository;
 
     public Initializer(AlbumRepository albumRepository){
@@ -14,7 +15,7 @@ public class Initializer {
     }
 
     @PostConstruct
-    public void initial(){
+    public void initialize(){
         if (albumRepository.findAll().isEmpty()){
             albumRepository.saveAndFlush(new Album("2-8001-0108-3",
                     "Les Schtroumpfs noirs",

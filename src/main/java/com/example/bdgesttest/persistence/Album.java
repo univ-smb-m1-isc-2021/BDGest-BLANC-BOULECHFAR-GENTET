@@ -5,10 +5,19 @@ import java.util.ArrayList;
 
 @Entity
 public class Album {
+
+    // Attributs
+
     @Id
     private String isbn;
-    private String title, img, serie, num_serie;
-    @OneToMany private ArrayList<Contributor> contributorsList;
+    private String title;
+    private String img;
+    private String serie;
+    private String num_serie;
+    @OneToMany
+    private ArrayList<Contributor> contributorsList;
+
+    // Constructeurs
 
     public Album(String isbn, String title, String img, String serie, String num_serie, ArrayList<Contributor> contributorsList) {
         this.isbn = isbn;
@@ -19,19 +28,67 @@ public class Album {
         this.contributorsList = contributorsList;
     }
 
-    public Album() {
+    public Album() {}
 
+    // Methodes
+
+    public String getIsbn() {
+        return this.isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImg() {
+        return this.img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getSerie() {
+        return this.serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+
+    public String getNum_serie() {
+        return this.num_serie;
+    }
+
+    public void setNum_serie(String num_serie) {
+        this.num_serie = num_serie;
+    }
+
+    public ArrayList<Contributor> getContributorsList() {
+        return this.contributorsList;
+    }
+
+    public void setContributorsList(ArrayList<Contributor> contributorsList) {
+        this.contributorsList = contributorsList;
     }
 
     @Override
     public String toString() {
-        return "Album{" + '\n' +
-                "   isbn = " + isbn + '\n' +
-                "   title = " + title + '\n' +
-                "   img = " + img + '\n' +
-                "   serie = " + serie + '\n' +
-                "   num_serie = " + num_serie + '\n' +
-                "   contributorsList = " + contributorsList + '\n' +
-                '}';
+        return "Album {\n" +
+                "   isbn = "+this.isbn+"\n" +
+                "   title = "+this.title+"\n" +
+                "   img = "+this.img+"\n" +
+                "   serie = "+this.serie+"\n" +
+                "   num_serie = "+this.num_serie+"\n" +
+                "   contributorsList = "+this.contributorsList+"\n" +
+                "}\n";
     }
 }

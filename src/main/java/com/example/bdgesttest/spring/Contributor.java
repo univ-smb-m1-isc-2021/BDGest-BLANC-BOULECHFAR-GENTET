@@ -3,12 +3,17 @@ package com.example.bdgesttest.spring;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Contributor extends AbstractPersistable<Long> {
 
     // Attributs
 
+    @Id
+    @GeneratedValue
+    private Long id;
     private String name;
     private String role;
 
@@ -16,16 +21,20 @@ public class Contributor extends AbstractPersistable<Long> {
 
     public Contributor() {}
 
-    public Contributor(Long id_contributor) {
-        this.setId(id_contributor);
-    }
-
     public Contributor(String name, String role) {
         this.name = name;
         this.role = role;
     }
 
     // Methodes
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return this.name;
