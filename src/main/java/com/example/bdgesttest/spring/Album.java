@@ -5,24 +5,23 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.*;
 import java.util.ArrayList;
 
-@Entity public class Album extends AbstractPersistable<Long> {
+@Entity
+public class Album extends AbstractPersistable<Long> {
 
     // Attributs
 
-    @Column(unique = true) private String isbn;
+    @Id
+    private String isbn;
     private String title;
     private String img;
     private String serie;
     private String num_serie;
-    @OneToMany private ArrayList<Contributor> contributorsList;
+    @OneToMany
+    private ArrayList<Contributor> contributorsList;
 
     // Constructeurs
 
     public Album() {}
-
-    public Album(Long id_album) {
-        this.setId(id_album);
-    }
 
     public Album(String isbn, String title, String img, String serie, String num_serie, ArrayList<Contributor> contributorsList) {
         this.isbn = isbn;
