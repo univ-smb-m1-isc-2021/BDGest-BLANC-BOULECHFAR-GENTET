@@ -5,20 +5,17 @@ class Album extends Component {
 
     constructor(props) {
         super(props);
+        let finalTitle = this.props.album.title;
         if (this.props.album.title.length > 15) {
-
+            this.finalTitle = this.props.album.title.substring(0, 15) + "...";
         }
-    }
-
-    componentWillMount() {
-
     }
 
     render() {
         return (
             <div id="divVignetteAlbum">
-                <img src={this.props.album.img}/>
-                <p>{this.props.album.title}</p>
+                <img alt={this.props.album.title} src={this.props.album.img}/>
+                <p title={this.props.album.title}>{this.finalTitle}</p>
             </div>
         );
     }
