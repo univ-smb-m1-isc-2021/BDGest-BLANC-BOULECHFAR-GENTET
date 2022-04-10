@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './App.css';
-
 import Accueil from "./components/Accueil/Accueil.js";
 import Album from "./components/Album/Album.js";
 import ListeAlbums from "./components/ListeAlbums/ListeAlbums.js";
@@ -9,7 +8,7 @@ import DetailsAlbum from "./components/DetailsAlbum/DetailsAlbum.js";
 import Connexion from "./components/Connexion/Connexion.js";
 import Inscription from "./components/Inscription/Inscription.js";
 
-class App extends Component {
+export default class App extends Component {
 
     constructor(props) {
         super(props);
@@ -70,5 +69,3 @@ class App extends Component {
     }
 
 }
-
-export default App;

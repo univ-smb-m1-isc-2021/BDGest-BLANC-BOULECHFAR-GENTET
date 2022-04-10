@@ -1,8 +1,61 @@
+#listeAlbumsWrapper {
+    width: 100%;
+    height: 100%;
+}
+
+#divBarreDeRecherche {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 32px;
+}
+
+#inputRecherche {
+    width: 97%;
+    height: 99%;
+    padding-left: 8px;
+    border-top: solid 2px black;
+    border-left: solid 2px black;
+    border-bottom: solid 2px black;
+    border-right: none;
+    border-radius: 25px 0px 0px 25px;
+}
+
+#imageLoupe {
+    width: 32px;
+    height: 32px;
+    padding: 8px 0px 8px 0px;
+    border-top: solid 2px black;
+    border-left: none;
+    border-bottom: solid 2px black;
+    border-right: solid 2px black;
+    border-radius: 0px 25px 25px 0px;
+    cursor: pointer;
+}
+
 #divListeAlbums {
     display: grid;
     grid-template-columns: 200px 200px 200px 200px 200px;
     row-gap: 16px;
-    width: 100%;
-    height: 100%;
     justify-content: space-evenly;
+}
+
+.popupDetailsAlbum {
+    position: absolute;
+    z-index: 1;
+    width: 50%;
+    height: auto;
+    top: 30%;
+    left: 25%;
+    background-color: red;
+}
+
+#divDetailsAlbum {
+    display: flex;
+}
+
+.popupDetailsAlbum img {
+    width: 200px;
+    height: 300px;
 }
