@@ -3,6 +3,23 @@ import "./Inscription.css";
 
 export default class Inscription extends Component {
 
+    inscription() {
+        let pseudo = document.getElementById("inputPseudo").value;
+        let password = document.getElementById("inputPassword").value;
+        let selectRole = document.getElementById("selectRole");
+        let role = selectRole.options[selectRole.selectedIndex].value;
+        console.log("Salut :" + pseudo + ", " + password + ", " + role);
+        if (pseudo != "" && password != "" && role != "none") {
+            const axios = require("axios");
+            axios.get("/api/addUser?login=" + pseudo + "&password=" + password + "&role=" + role);
+            document.getElementById("inputPseudo").value = "";
+            document.getElementById("inputPassword").value = "";
+            selectRole.selectedIndex = 0;
+        } else {
+            alert("Veuillez remplir tous les champs !");
+        }
+    }
+
     render() {
         return (
             <div id="divInscription">
@@ -21,7 +38,7 @@ export default class Inscription extends Component {
                     <option value="Administrateur">Administrateur</option>
                 </select>
                 <br/>
-                <button>S'inscrire</button>
+                <button onClick={() => this.inscription()}>S'inscrire</button>
             </div>
         );
     }
