@@ -1,25 +1,22 @@
 package com.example.bdgesttest.persistence;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Album {
 
     // Attributs
-
     @Id
     private String isbn;
     private String title;
     private String img;
     private String serie;
     private String num_serie;
-    @OneToMany
+    @ManyToMany
     private List<Contributor> contributorsList;
 
     // Constructeurs
-
     public Album(String isbn, String title, String img, String serie, String num_serie, List<Contributor> contributorsList) {
         this.isbn = isbn;
         this.title = title;
@@ -32,7 +29,6 @@ public class Album {
     public Album() {}
 
     // Methodes
-
     public String getIsbn() {
         return this.isbn;
     }

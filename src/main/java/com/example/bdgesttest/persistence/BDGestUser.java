@@ -1,38 +1,28 @@
 package com.example.bdgesttest.persistence;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
-public class User {
+public class BDGestUser {
 
     // Attributs
-
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
     private String login;
     private String password;
     private String role;
-    @OneToMany
-    private List<Album> albumsList;
 
     // Constructeurs
+    public BDGestUser() {}
 
-    public User() {}
-
-    public User(String login, String password, String role, List<Album> albumsList) {
+    public BDGestUser(String login, String password, String role) {
         this.login = login;
         this.password = password;
         this.role = role;
-        this.albumsList = albumsList;
     }
 
     // Méthodes
-
     public Long getId() {
         return id;
     }
@@ -63,13 +53,5 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public List<Album> getAlbumsList() {
-        return albumsList;
-    }
-
-    public void setAlbumsList(List<Album> albumsList) {
-        this.albumsList = albumsList;
     }
 }

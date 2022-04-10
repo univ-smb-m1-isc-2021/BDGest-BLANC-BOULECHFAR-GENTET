@@ -9,9 +9,9 @@ import java.util.ArrayList;
 public class Initializer {
 
     private final AlbumRepository albumRepository;
-    private final UserRepository userRepository;
+    private final BDGestUserRepository userRepository;
 
-    public Initializer(AlbumRepository albumRepository, UserRepository userRepository){
+    public Initializer(AlbumRepository albumRepository, BDGestUserRepository userRepository){
         this.albumRepository = albumRepository;
         this.userRepository = userRepository;
     }
@@ -31,10 +31,9 @@ public class Initializer {
                     "Les schtroumpfs",
                     "2",
                     new ArrayList<>()));
-            userRepository.saveAndFlush(new User("poupi",
+            userRepository.saveAndFlush(new BDGestUser("poupi",
                     "zer",
-                    "administrateur",
-                    new ArrayList<>()));
+                    "administrateur"));
         }
     }
 }

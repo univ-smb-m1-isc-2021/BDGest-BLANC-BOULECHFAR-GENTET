@@ -10,7 +10,6 @@ import javax.persistence.Id;
 public class Contributor {
 
     // Attributs
-
     @Id
     @GeneratedValue
     private Long id;
@@ -18,7 +17,6 @@ public class Contributor {
     private String role;
 
     // Constructeurs
-
     public Contributor() {}
 
     public Contributor(String name, String role) {
@@ -27,7 +25,6 @@ public class Contributor {
     }
 
     // Methodes
-
     public Long getId() {
         return id;
     }

@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AlbumService {
+public class BDGestService {
 
     private final AlbumRepository albumRepository;
-    private final UserRepository userRepository;
+    private final BDGestUserRepository bdgestRepository;
 
-    public AlbumService(AlbumRepository albumRepository, UserRepository userRepository) {
+    public BDGestService(AlbumRepository albumRepository, BDGestUserRepository bdgestRepository) {
         this.albumRepository = albumRepository;
-        this.userRepository = userRepository;
+        this.bdgestRepository = bdgestRepository;
     }
 
     public List<Album> getAllAlbums() {
@@ -35,7 +35,7 @@ public class AlbumService {
     }
 
     public void addUser(String login, String password, String role, List<Album> albumsList) {
-        userRepository.save(new User(login, password, role, albumsList));
+        bdgestRepository.save(new BDGestUser(login, password, role));
     }
 
     // Scrap an album from a given url at www.bedetheque.com
