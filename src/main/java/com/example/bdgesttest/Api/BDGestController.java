@@ -51,6 +51,20 @@ public class BDGestController {
         return album;
     }
 
+    @GetMapping(value = "/api/scrapSerie")
+    public int scrapSerie(@RequestParam String url) throws IOException {
+        logger.info("Service scrapSerie");
+        int nbScraps = bdGestService.scrapSerie(url);
+        return nbScraps;
+    }
+
+    @GetMapping(value = "/api/scrapNbAlbums")
+    public int scrapNbAlbums(@RequestParam int nb) throws IOException {
+        logger.info("Service scrapNbAlbums");
+        int nbScraps = bdGestService.scrapNbAlbums(nb);
+        return nbScraps;
+    }
+
     @GetMapping(value = "/api/addUser")
     public void addUser(@RequestParam String login, @RequestParam String password, @RequestParam String role) {
         logger.info("Service addUser");

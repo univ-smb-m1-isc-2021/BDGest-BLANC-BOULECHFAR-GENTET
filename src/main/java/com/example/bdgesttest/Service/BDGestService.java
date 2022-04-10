@@ -3,11 +3,14 @@ package com.example.bdgesttest.Service;
 import com.example.bdgesttest.persistence.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 @Service
 public class BDGestService {
@@ -28,10 +31,19 @@ public class BDGestService {
         return albumRepository.findByIsbn(isbn);
     }
 
-    public void addAlbum(String isbn, String title, String img, String serie, String num_serie) {
-        if (!albumRepository.existsById(isbn)) {
+    public boolean isNotNull(String str){
+        return str != null && !str.equals("");
+    }
+    public boolean isValid(String isbn, String title, String img, String serie, String num_serie){
+        return isNotNull(isbn) && isNotNull(title) && isNotNull(img) && isNotNull(serie) && isNotNull(num_serie);
+    }
+    // returns true if album added, false if not added
+    public boolean addAlbum(String isbn, String title, String img, String serie, String num_serie) {
+        if (!albumRepository.existsById(isbn) && isValid(isbn, title, img, serie, num_serie)) {
             albumRepository.save(new Album(isbn, title, img, serie, num_serie, new ArrayList<>()));
+            return true;
         }
+        return false;
     }
 
     public void addUser(String login, String password, String role, List<Album> albumsList) {
@@ -39,7 +51,7 @@ public class BDGestService {
     }
 
     // Scrap an album from a given url at www.bedetheque.com
-    public static Album scrapAlbum(String url) throws IOException {
+    public Album scrapAlbum(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
         String isbn = doc.select("span[itemprop = isbn]").text();
         String[] info_title = doc.select("div.bandeau-info > h2").text().split("\\. ");
@@ -66,6 +78,63 @@ public class BDGestService {
                 }
             }
         }
-        return new Album(isbn, title, img, serie, num_serie, contributors);
+        boolean res = this.addAlbum(isbn, title, img, serie, num_serie);
+        if (res){
+            return new Album(isbn, title, img, serie, num_serie, contributors);
+        }
+        return null;
+    }
+
+    public int scrapSerie(String url) throws IOException {
+        Document doc = Jsoup.connect(url).get();
+        int nb_albums_total = Integer.parseInt(doc.select("i.icon-book").first().nextSibling().toString().split(" ")[1]);
+        int nb_albums_added = 0;
+        String link_tome;
+        Album album;
+        boolean valid;
+        if(nb_albums_total > 1) {
+            for (Element element : doc.select("ul.liste-albums-side > li > a")) {
+                link_tome = element.attr("href");
+                album = this.scrapAlbum(link_tome);
+                if (album != null){
+                    nb_albums_added++;
+                }
+            }
+        } else {
+            link_tome = doc.select("a.titre").attr("href");
+            this.scrapAlbum(link_tome);
+            album = this.scrapAlbum(link_tome);
+            if (album != null){
+                nb_albums_added++;
+            }
+        }
+        return nb_albums_added;
+    }
+
+    public String getRandomSerie() throws IOException {
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        int length = alphabet.length();
+        Random random = new Random();
+        String randomLetter = String.valueOf(alphabet.charAt(random.nextInt(length))).toUpperCase();
+        String url = "https://www.bedetheque.com/bandes_dessinees_" + randomLetter + ".html";
+        Document doc = Jsoup.connect(url).get();
+        int nbAlbums = Integer.valueOf(doc.select("span.sous-titre-texte").text().split(" ")[0]);
+        return doc.select("ul.nav-liste > li > a").get(1).attr("href");
+    }
+
+    //scrap albums until reach max
+    public int scrapNbAlbums(int max) throws IOException {
+        if (max <= 5000){
+            int nbScrap = 0;
+            String serie;
+            while (nbScrap< max) {
+                serie = getRandomSerie();
+                nbScrap += scrapSerie(serie);
+            }
+            return nbScrap;
+        } else {
+            return 0;
+        }
+
     }
 }
