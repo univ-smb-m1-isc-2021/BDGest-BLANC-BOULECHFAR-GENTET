@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,29 @@ public class BDGestController {
     @GetMapping(value = "/api/addAlbum")
     public void addAlbum(String isbn, String title, String img, String serie, String num_serie, ArrayList<Contributor> contributorsList) {
         logger.info("Service addAlbum");
-        bdGestService.addAlbum(isbn, title, img, serie, num_serie, contributorsList);
+        bdGestService.addAlbum(isbn, title, img, serie, num_serie);
+    }
+
+    @GetMapping(value = "/api/scrapAlbum")
+    public Album scrapAlbum(@RequestParam String url) throws IOException {
+        logger.info("Service scrapAlbum");
+        Album album = bdGestService.scrapAlbum(url);
+        bdGestService.addAlbum(album.getIsbn(), album.getTitle(), album.getImg(), album.getSerie(), album.getNum_serie());
+        return album;
+    }
+
+    @GetMapping(value = "/api/scrapSerie")
+    public int scrapSerie(@RequestParam String url) throws IOException {
+        logger.info("Service scrapSerie");
+        int nbScraps = bdGestService.scrapSerie(url);
+        return nbScraps;
+    }
+
+    @GetMapping(value = "/api/scrapNbAlbums")
+    public int scrapNbAlbums(@RequestParam int nb) throws IOException {
+        logger.info("Service scrapNbAlbums");
+        int nbScraps = bdGestService.scrapNbAlbums(nb);
+        return nbScraps;
     }
 
     @GetMapping(value = "/api/addUser")
