@@ -29,6 +29,10 @@ public class BDGestUser {
     // Constructeurs
     public BDGestUser() {}
 
+    public BDGestUser(Long id){
+        this.id = id;
+    }
+
     public BDGestUser(String login, String password, String role) {
         this.login = login;
         this.password = password;

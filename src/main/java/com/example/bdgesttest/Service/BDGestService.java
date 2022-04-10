@@ -43,8 +43,17 @@ public class BDGestService {
         return false;
     }
 
-    public void addUser(String login, String password, String role) {
-        bdgestRepository.save(new BDGestUser(login, password, role));
+    public boolean addUser(String login, String password, String role) {
+        if(bdgestRepository.findBDGestUserByLogin(login) == null){
+            bdgestRepository.save(new BDGestUser(login, password, role));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public BDGestUser getUser(String login) {
+        return bdgestRepository.findBDGestUserByLogin(login);
     }
 
     // Scrap an album from a given url at www.bedetheque.com

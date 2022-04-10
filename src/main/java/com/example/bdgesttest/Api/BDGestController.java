@@ -2,6 +2,7 @@ package com.example.bdgesttest.Api;
 
 import com.example.bdgesttest.Service.BDGestService;
 import com.example.bdgesttest.persistence.Album;
+import com.example.bdgesttest.persistence.BDGestUser;
 import com.example.bdgesttest.persistence.Contributor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +69,17 @@ public class BDGestController {
     public void addUser(@RequestParam String login, @RequestParam String password, @RequestParam String role) {
         logger.info("Service addUser");
         bdGestService.addUser(login, password, role);
+    }
+
+    @GetMapping(value = "/api/check")
+    public BDGestUser getUser(@RequestParam String login, @RequestParam String password) {
+        logger.info("Service checkUser");
+        BDGestUser bdGestUser = bdGestService.getUser(login);
+        if (bdGestUser != null && bdGestUser.getPassword().equals(password)){
+            return bdGestUser;
+        } else {
+            return new BDGestUser((long) -1);
+        }
     }
 
 }

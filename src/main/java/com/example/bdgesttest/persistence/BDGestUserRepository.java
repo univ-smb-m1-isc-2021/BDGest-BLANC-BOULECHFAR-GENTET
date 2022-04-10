@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 public interface BDGestUserRepository extends JpaRepository<BDGestUser, Long>  {
 
     BDGestUser findUserById(Long id);
+    BDGestUser findBDGestUserByLogin(String login);
 
 }
