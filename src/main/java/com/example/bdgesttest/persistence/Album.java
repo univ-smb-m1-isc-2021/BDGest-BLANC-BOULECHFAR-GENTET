@@ -1,5 +1,8 @@
 package com.example.bdgesttest.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +30,7 @@ public class Album {
             inverseJoinColumns = { @JoinColumn(name = "id_contributor") })
     private Set<Contributor> contributorAlbum = new HashSet<>();
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "userAlbum", cascade = CascadeType.MERGE)
     private Set<BDGestUser> userAlbum = new HashSet<>();
 
@@ -101,16 +105,30 @@ public class Album {
         this.num_serie = num_serie;
     }
 
-    public Set<Contributor> getContributors() {
-        return contributorAlbum;
-    }
-
     public void setContributors(Set<Contributor> contributors) {
         this.contributorAlbum = contributors;
     }
 
     public void addContributor(Contributor contributor){
         this.contributorAlbum.add(contributor);
+    }
+
+    @JsonManagedReference
+    public Set<Contributor> getContributorAlbum() {
+        return contributorAlbum;
+    }
+
+    public void setContributorAlbum(Set<Contributor> contributorAlbum) {
+        this.contributorAlbum = contributorAlbum;
+    }
+
+    @JsonBackReference
+    public Set<BDGestUser> getUserAlbum() {
+        return userAlbum;
+    }
+
+    public void setUserAlbum(Set<BDGestUser> userAlbum) {
+        this.userAlbum = userAlbum;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.bdgesttest.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +17,8 @@ public class Contributor {
     private Long id;
     private String name;
     private String role;
+
+    @JsonBackReference
     @ManyToMany(mappedBy = "contributorAlbum", cascade = CascadeType.MERGE)
     private Set<Album> contributorAlbum = new HashSet<>();
 
@@ -51,6 +55,7 @@ public class Contributor {
         this.role = role;
     }
 
+    @JsonBackReference
     public Set<Album> getContributors() {
         return contributorAlbum;
     }

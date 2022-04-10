@@ -1,5 +1,7 @@
 package com.example.bdgesttest.persistence;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class BDGestUser {
     private String password;
     private String role;
 
+    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "userAlbum",
@@ -76,6 +79,7 @@ public class BDGestUser {
         this.id = id;
     }
 
+    @JsonManagedReference
     public Set<Album> getUserAlbum() {
         return userAlbum;
     }

@@ -5,10 +5,7 @@ import com.example.bdgesttest.persistence.Album;
 import com.example.bdgesttest.persistence.Contributor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,10 +22,11 @@ public class BDGestController {
         this.bdGestService = albumService;
     }
 
+    @CrossOrigin
     @GetMapping(value = "/api/getAllAlbums")
     public List<Album> getAllAlbums() {
         logger.info("Service getAlllbums");
-        return new ArrayList<>(bdGestService.getAllAlbums());
+        return bdGestService.getAllAlbums();
     }
 
     @GetMapping(value = "/api/getAlbum")
