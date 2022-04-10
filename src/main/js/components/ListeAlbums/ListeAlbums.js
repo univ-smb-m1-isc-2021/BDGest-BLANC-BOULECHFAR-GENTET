@@ -1,13 +1,13 @@
 import React, {Component} from "react";
-import Album from "../Album/Album.js";
+import "./ListeAlbums.css";
 
 class ListeAlbums extends Component {
 
     render() {
         return (
-            <Album>
+            <div id="divListeAlbums">
                 {this.props.children}
-            </Album>
+            </div>
         );
     }
 }

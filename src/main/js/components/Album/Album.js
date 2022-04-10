@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import './Album.css';
 
-class Album extends Component {
+export default class Album extends Component {
 
     constructor(props) {
         super(props);
@@ -15,10 +15,10 @@ class Album extends Component {
         return (
             <div id="divVignetteAlbum">
                 <img alt={this.props.album.title} src={this.props.album.img}/>
-                <p title={this.props.album.title}>{this.finalTitle}</p>
+                <div id="titreAlbum">
+                    <span title={this.props.album.title}>{this.finalTitle}</span>
+                </div>
             </div>
         );
     }
 }
-
-export default Album;
