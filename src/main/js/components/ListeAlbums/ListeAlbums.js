@@ -1,15 +1,23 @@
 import React, {Component} from "react";
 import "./ListeAlbums.css";
 
-class ListeAlbums extends Component {
+export default class ListeAlbums extends Component {
 
     render() {
         return (
-            <div id="divListeAlbums">
-                {this.props.children}
+            <div id="listeAlbumsWrapper">
+
+                <div id="divBarreDeRecherche">
+                    <input id="inputRecherche" type="text" placeholder="Rechercher un album par titre, ISBN..."/>
+                    <img id="imageLoupe" src="./search.png"/>
+                </div>
+
+                <div id="divListeAlbums">
+                    {this.props.children}
+                </div>
+
             </div>
+
         );
     }
 }
-
-export default ListeAlbums;

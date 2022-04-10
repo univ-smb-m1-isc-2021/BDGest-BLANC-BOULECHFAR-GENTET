@@ -5,7 +5,24 @@ export default class Inscription extends Component {
 
     render() {
         return (
-            <h1>Inscrivez-vous !</h1>
+            <div id="divInscription">
+                <h1>Inscrivez-vous sur BDGest :</h1>
+                <label for="inputPseudo">Nom d'utilisateur :</label>
+                <br/>
+                <input id="inputPseudo" type="text"/>
+                <br/>
+                <label for="inputPassword">Mot de passe :</label>
+                <br/>
+                <input id="inputPassword" type="password"/>
+                <br/>
+                <select id="selectRole">
+                    <option value="none" selected disabled="true">Sélectionnez un rôle</option>
+                    <option value="Utilisateur">Utilisateur</option>
+                    <option value="Administrateur">Administrateur</option>
+                </select>
+                <br/>
+                <button>S'inscrire</button>
+            </div>
         );
     }
 }
