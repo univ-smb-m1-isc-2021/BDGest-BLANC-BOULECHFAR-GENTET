@@ -7,12 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @RestController
 public class AlbumController {
@@ -31,6 +30,7 @@ public class AlbumController {
     }
 
     @GetMapping(value = "/api/getAlbum")
+    @ResponseBody
     public Album getAlbum(@RequestParam String isbn){
         logger.info("Service getAlbum");
         return albumService.getAlbum(isbn);
@@ -41,4 +41,10 @@ public class AlbumController {
         logger.info("Service addAlbum");
         albumService.addAlbum(isbn, title, img, serie, num_serie, contributorsList);
     }
+    @GetMapping(value = "/api/addUser")
+    public void addUser(@RequestParam String login, @RequestParam String password, @RequestParam String role) {
+        logger.info("Service addUser");
+        albumService.addUser(login, password, role, new ArrayList<>());
+    }
+
 }

@@ -1,8 +1,6 @@
 package com.example.bdgesttest.Service;
 
-import com.example.bdgesttest.persistence.Album;
-import com.example.bdgesttest.persistence.AlbumRepository;
-import com.example.bdgesttest.persistence.Contributor;
+import com.example.bdgesttest.persistence.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +9,11 @@ import java.util.List;
 public class AlbumService {
 
     private final AlbumRepository albumRepository;
+    private final UserRepository userRepository;
 
-    public AlbumService(AlbumRepository albumRepository) {
+    public AlbumService(AlbumRepository albumRepository, UserRepository userRepository) {
         this.albumRepository = albumRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Album> getAllAlbums() {
@@ -28,5 +28,9 @@ public class AlbumService {
         if (!albumRepository.existsById(isbn)) {
             albumRepository.save(new Album(isbn, title, img, serie, num_serie, contributorsList));
         }
+    }
+
+    public void addUser(String login, String password, String role, List<Album> albumsList) {
+        userRepository.save(new User(login, password, role, albumsList));
     }
 }

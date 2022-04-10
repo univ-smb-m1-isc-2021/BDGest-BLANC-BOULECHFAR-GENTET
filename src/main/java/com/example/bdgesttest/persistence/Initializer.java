@@ -31,8 +31,6 @@ public class Initializer {
                     "Les schtroumpfs",
                     "2",
                     new ArrayList<>()));
-        }
-        if (userRepository.findAll().isEmpty()) {
             userRepository.saveAndFlush(new User("poupi",
                     "zer",
                     "administrateur",
