@@ -67,7 +67,7 @@ public class BDGestController {
     @GetMapping(value = "/api/addUser")
     public void addUser(@RequestParam String login, @RequestParam String password, @RequestParam String role) {
         logger.info("Service addUser");
-        bdGestService.addUser(login, password, role, new ArrayList<>());
+        bdGestService.addUser(login, password, role);
     }
 
 }

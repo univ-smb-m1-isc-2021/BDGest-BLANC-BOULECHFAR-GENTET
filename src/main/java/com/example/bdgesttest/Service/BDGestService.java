@@ -43,7 +43,7 @@ public class BDGestService {
         return false;
     }
 
-    public void addUser(String login, String password, String role, List<Album> albumsList) {
+    public void addUser(String login, String password, String role) {
         bdgestRepository.save(new BDGestUser(login, password, role));
     }
 
