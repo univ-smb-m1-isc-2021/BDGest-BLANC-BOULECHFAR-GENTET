@@ -3,9 +3,11 @@ package com.example.bdgesttest.persistence;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AlbumRepository extends JpaRepository<Album, String> {
+import java.util.Optional;
 
-    Album findByIsbn(String isbn);
+@Repository
+public interface AlbumRepository extends JpaRepository<Album, Long> {
+
+    Optional<Album> findById(Long id);
 
 }

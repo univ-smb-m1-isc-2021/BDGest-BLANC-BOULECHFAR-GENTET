@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class BDGestController {
@@ -32,9 +33,9 @@ public class BDGestController {
 
     @GetMapping(value = "/api/getAlbum")
     @ResponseBody
-    public Album getAlbum(@RequestParam String isbn){
+    public Optional<Album> getAlbum(@RequestParam Long id){
         logger.info("Service getAlbum");
-        return bdGestService.getAlbum(isbn);
+        return bdGestService.getAlbum(id);
     }
 
     @GetMapping(value = "/api/addAlbum")

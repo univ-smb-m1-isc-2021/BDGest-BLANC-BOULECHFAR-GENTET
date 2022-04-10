@@ -1,20 +1,22 @@
 package com.example.bdgesttest.persistence;
 
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "contributor")
 public class Contributor {
 
     // Attributs
     @Id
-    @GeneratedValue
+    @Column(name="id_contributor", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String role;
+    @ManyToMany(mappedBy = "contributorAlbum", cascade = CascadeType.MERGE)
+    private Set<Album> contributorAlbum = new HashSet<>();
 
     // Constructeurs
     public Contributor() {}
@@ -47,6 +49,14 @@ public class Contributor {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Set<Album> getContributors() {
+        return contributorAlbum;
+    }
+
+    public void setContributors(Set<Album> contributors) {
+        this.contributorAlbum = contributors;
     }
 
     @Override

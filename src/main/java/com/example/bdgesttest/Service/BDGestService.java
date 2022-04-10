@@ -7,10 +7,7 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class BDGestService {
@@ -27,8 +24,8 @@ public class BDGestService {
         return albumRepository.findAll();
     }
 
-    public Album getAlbum(String isbn) {
-        return albumRepository.findByIsbn(isbn);
+    public Optional<Album> getAlbum(Long id) {
+        return albumRepository.findById(id);
     }
 
     public boolean isNotNull(String str){
@@ -39,8 +36,8 @@ public class BDGestService {
     }
     // returns true if album added, false if not added
     public boolean addAlbum(String isbn, String title, String img, String serie, String num_serie) {
-        if (!albumRepository.existsById(isbn) && isValid(isbn, title, img, serie, num_serie)) {
-            albumRepository.save(new Album(isbn, title, img, serie, num_serie, new ArrayList<>()));
+        if (isValid(isbn, title, img, serie, num_serie)) {
+            albumRepository.save(new Album(isbn, title, img, serie, num_serie));
             return true;
         }
         return false;
@@ -80,7 +77,7 @@ public class BDGestService {
         }
         boolean res = this.addAlbum(isbn, title, img, serie, num_serie);
         if (res){
-            return new Album(isbn, title, img, serie, num_serie, contributors);
+            return new Album(isbn, title, img, serie, num_serie);
         }
         return null;
     }
@@ -118,8 +115,10 @@ public class BDGestService {
         String randomLetter = String.valueOf(alphabet.charAt(random.nextInt(length))).toUpperCase();
         String url = "https://www.bedetheque.com/bandes_dessinees_" + randomLetter + ".html";
         Document doc = Jsoup.connect(url).get();
+        System.out.println(url);
+        System.out.println("nb : " + doc.select("span.sous-titre-texte").text());
         int nbAlbums = Integer.valueOf(doc.select("span.sous-titre-texte").text().split(" ")[0]);
-        return doc.select("ul.nav-liste > li > a").get(1).attr("href");
+        return doc.select("ul.nav-liste > li > a").get(random.nextInt(nbAlbums)).attr("href");
     }
 
     //scrap albums until reach max

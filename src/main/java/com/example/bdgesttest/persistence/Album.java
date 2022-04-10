@@ -1,34 +1,66 @@
 package com.example.bdgesttest.persistence;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "album")
 public class Album {
 
     // Attributs
     @Id
+    @Column(name="id_album", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String isbn;
     private String title;
     private String img;
     private String serie;
     private String num_serie;
-    @ManyToMany
-    private List<Contributor> contributorsList;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "contributorAlbum",
+            joinColumns = { @JoinColumn(name = "id_album") },
+            inverseJoinColumns = { @JoinColumn(name = "id_contributor") })
+    private Set<Contributor> contributorAlbum = new HashSet<>();
+
+    @ManyToMany(mappedBy = "userAlbum", cascade = CascadeType.MERGE)
+    private Set<BDGestUser> userAlbum = new HashSet<>();
+
 
     // Constructeurs
-    public Album(String isbn, String title, String img, String serie, String num_serie, List<Contributor> contributorsList) {
+    public Album(String isbn, String title, String img, String serie, String num_serie) {
         this.isbn = isbn;
         this.title = title;
         this.img = img;
         this.serie = serie;
         this.num_serie = num_serie;
-        this.contributorsList = contributorsList;
     }
 
     public Album() {}
 
+    public Album(String isbn, String title, String img, String serie, String num_serie, Set<Contributor> contributorSet) {
+        this.isbn = isbn;
+        this.title = title;
+        this.img = img;
+        this.serie = serie;
+        this.num_serie = num_serie;
+        this.contributorAlbum = contributorSet;
+    }
+
     // Methodes
+
+    public Long getId_album() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getIsbn() {
         return this.isbn;
     }
@@ -69,12 +101,16 @@ public class Album {
         this.num_serie = num_serie;
     }
 
-    public List<Contributor> getContributorsList() {
-        return this.contributorsList;
+    public Set<Contributor> getContributors() {
+        return contributorAlbum;
     }
 
-    public void setContributorsList(List<Contributor> contributorsList) {
-        this.contributorsList = contributorsList;
+    public void setContributors(Set<Contributor> contributors) {
+        this.contributorAlbum = contributors;
+    }
+
+    public void addContributor(Contributor contributor){
+        this.contributorAlbum.add(contributor);
     }
 
     @Override
@@ -85,7 +121,7 @@ public class Album {
                 "   img = "+this.img+"\n" +
                 "   serie = "+this.serie+"\n" +
                 "   num_serie = "+this.num_serie+"\n" +
-                "   contributorsList = "+this.contributorsList+"\n" +
+                "   contributors = "+"\n" +
                 "}\n";
     }
 }
