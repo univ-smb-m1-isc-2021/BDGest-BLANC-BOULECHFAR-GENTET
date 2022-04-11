@@ -15,6 +15,8 @@ export default class App extends Component {
         this.state = {
             currentComponent: "Accueil",
             components: {},
+            user_id: -1,
+            user_login: "%null%",
             result: []
         }
     }
@@ -24,7 +26,7 @@ export default class App extends Component {
             components: {
                 "Accueil": <Accueil />,
                 "ListeAlbums": <ListeAlbums>{this.state.result.map(a => <Album album={a}/>)}</ListeAlbums>,
-                "Connexion": <Connexion />,
+                "Connexion": <Connexion onLogin={this.getUserInfos} />,
                 "Inscription": <Inscription />
             }
         })
@@ -32,6 +34,23 @@ export default class App extends Component {
 
     changeContent(contentName) {
         this.setState({currentComponent: contentName});
+    }
+
+    getUserInfos = (user_id, user_login) => {
+        console.log("Hey : " + user_id + ", " + user_login);
+        this.setState({
+            user_id: user_id,
+            user_login: user_login,
+            currentComponent: "Accueil"
+        });
+    }
+
+    disconnectUser() {
+        this.setState({
+            user_id: -1,
+            user_login: "%null%",
+            currentComponent: "Accueil"
+        });
     }
 
     componentWillMount() {
@@ -55,10 +74,19 @@ export default class App extends Component {
                         <li onClick={() => this.changeContent("ListeAlbums")}>Ma collection</li>
                     </ul>
                     <span id="separator"></span>
-                    <ul className="listeLiens">
-                        <li onClick={() => this.changeContent("Connexion")}>Connexion</li>
-                        <li onClick={() => this.changeContent("Inscription")}>Inscription</li>
-                    </ul>
+                    {
+                        this.state.user_id != -1 ?
+                            <ul className="listeLiens">
+                                <li>{this.state.user_login}</li>
+                                <li onClick={() => this.disconnectUser()}>Déconnexion</li>
+                            </ul>
+                            :
+                            <ul className="listeLiens">
+                                <li onClick={() => this.changeContent("Connexion")}>Connexion</li>
+                                <li onClick={() => this.changeContent("Inscription")}>Inscription</li>
+                            </ul>
+                    }
+
                 </header>
 
                 <div id="contenuPage">
