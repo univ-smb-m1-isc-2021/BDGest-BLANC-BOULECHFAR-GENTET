@@ -21,10 +21,15 @@ export default class Album extends Component {
         })
     }
 
-    masquerDetails() {
+    masquerDetails = () => {
         this.setState({
             showDetails: false
         })
+    }
+
+    updateList = () => {
+        console.log("UpdateList dans Album");
+        this.props.updateAlbumList();
     }
 
     render() {
@@ -37,7 +42,7 @@ export default class Album extends Component {
                 {
                     this.state.showDetails ?
                         <div class="popupDetailsAlbum">
-                            <DetailsAlbum album={this.props.album} user_id={this.props.user_id}/>
+                            <DetailsAlbum album={this.props.album} user_id={this.props.user_id} userAlbumList={this.props.userAlbumList} updateAlbumList={this.updateList} inCollection={this.props.inCollection} masquerDetails={this.masquerDetails}/>
                             <button onClick={() => this.masquerDetails()}>Fermer</button>
                         </div>
                         :

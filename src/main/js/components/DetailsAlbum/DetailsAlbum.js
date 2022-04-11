@@ -7,6 +7,21 @@ export default class DetailsAlbum extends Component {
         super(props);
     }
 
+    updateList = () => {
+        this.props.updateAlbumList();
+    }
+
+    isInUserCollection() {
+        let res = false;
+        for (let i=0; i < this.props.userAlbumList.length; i++) {
+            let currentAlbumId = this.props.userAlbumList[i].id_album;
+            if (currentAlbumId == this.props.album.id_album) {
+                res = true;
+            }
+        }
+        return res;
+    }
+
     addAlbumToCollection() {
         if (this.props.user_id != -1) {
             const axios = require("axios");
@@ -14,9 +29,27 @@ export default class DetailsAlbum extends Component {
             axios.get("/api/addAlbumToUser?id_user=" + this.props.user_id + "&id_album=" + this.props.album.id_album).then((response) => {
                 if (response.data == false) {
                     alert("Erreur sur l'ajout");
+                } else {
+                    this.updateList();
                 }
             });
         }
+    }
+
+    removeAlbumFromCollection(inCollection) {
+        if (this.props.user_id != -1) {
+            const axios = require("axios");
+            axios.get("/api/remAlbumFromUser?id_album=" + this.props.album.id_album + "&id_user=" + this.props.user_id).then((response) => {
+                this.updateList();
+                if (this.props.inCollection) {
+                    this.masquerDetails();
+                }
+            })
+        }
+    }
+
+    masquerDetails() {
+        this.props.masquerDetails();
     }
 
     render() {
@@ -30,7 +63,10 @@ export default class DetailsAlbum extends Component {
                     <p>ISBN : {this.props.album.isbn}</p>
                     {
                         this.props.user_id != -1 ?
-                            <button onClick = {() => this.addAlbumToCollection()}>Ajouter à ma collection</button>
+                            this.isInUserCollection() ?
+                                <button onClick = {() => this.removeAlbumFromCollection()}>Retirer de ma collection</button>
+                                :
+                                <button onClick = {() => this.addAlbumToCollection()}>Ajouter à ma collection</button>
                             :
                             null
                     }

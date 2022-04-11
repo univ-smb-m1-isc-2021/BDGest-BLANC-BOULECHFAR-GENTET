@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import "./Collection.css";
 import Album from "../Album/Album";
+import axios from "axios";
 
 export default class Collection extends Component {
 
@@ -11,15 +12,19 @@ export default class Collection extends Component {
         }
     }
 
-    componentWillMount() {
+    updateList = () => {
+        console.log("UpdateList dans collection");
         if (this.props.user_id != -1) {
-            const axios = require("axios");
             axios.get("/api/albumsByUserId?id_user=" + this.props.user_id).then((response) => {
                 this.setState({
                     albumList: response.data
                 });
             });
         }
+    }
+
+    componentWillMount() {
+        this.updateList();
     }
 
     render() {
@@ -34,7 +39,7 @@ export default class Collection extends Component {
                 </div>
 
                 <div id="divListeAlbums">
-                    {this.state.albumList.map(album => <Album album={album} user_id={this.props.user_id}/>)}
+                    {this.state.albumList.map(album => <Album album={album} user_id={this.props.user_id} userAlbumList={this.state.albumList} updateAlbumList={this.updateList} inCollection={true}/>)}
                 </div>
 
             </div>
