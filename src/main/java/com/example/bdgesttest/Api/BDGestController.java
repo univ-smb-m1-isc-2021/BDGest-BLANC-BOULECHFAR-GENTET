@@ -9,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class BDGestController {
@@ -38,6 +35,27 @@ public class BDGestController {
         return bdGestService.getAlbum(id);
     }
 
+    @GetMapping(value = "/api/getThreeAlbums")
+    @ResponseBody
+    public List<Album> getThreeAlbums(){
+        logger.info("Service getThreeAlbums");
+        List<Album> albums = bdGestService.getAllAlbums();
+        int size = albums.size();
+        if (size <= 3){
+            return albums;
+        } else {
+            List<Album> albums_res = new ArrayList<>();
+            Random r = new Random();
+            while (albums_res.size() < 3){
+                Album album = albums.get(r.nextInt(albums.size()));
+                if (!albums_res.contains(album)){
+                    albums_res.add(album);
+                }
+            }
+            return albums_res;
+        }
+    }
+
     @GetMapping(value = "/api/addAlbum")
     public void addAlbum(String isbn, String title, String img, String serie, String num_serie, ArrayList<Contributor> contributorsList) {
         logger.info("Service addAlbum");
@@ -60,7 +78,7 @@ public class BDGestController {
     }
 
     @GetMapping(value = "/api/scrapNbAlbums")
-    public int scrapNbAlbums(@RequestParam int nb) throws IOException {
+    public int scrapNbAlbums(@RequestParam int nb) throws IOException, InterruptedException {
         logger.info("Service scrapNbAlbums");
         int nbScraps = bdGestService.scrapNbAlbums(nb);
         return nbScraps;
