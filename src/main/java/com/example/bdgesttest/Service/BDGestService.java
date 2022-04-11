@@ -131,6 +131,7 @@ public class BDGestService {
         return null;
     }
 
+    // Scrap a serie
     public int scrapSerie(String url) throws IOException {
         System.out.println("scrapSerie : " + url);
         Document doc = Jsoup.connect(url).get();
