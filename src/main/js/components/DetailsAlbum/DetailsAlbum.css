@@ -1,0 +1,96 @@
+.popupDetailsAlbumWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    align-items: center;
+    justify-content: center;
+}
+
+.popupDetailsAlbum {
+    position: relative;
+    width: auto;
+    height: auto;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+#boutonFermerPopup {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.divDetailsAlbum {
+    display: inline-flex;
+    width: 800px;
+    height: 400px;
+}
+
+#imgDetailsAlbum {
+    display: block;
+    width: 300px;
+    height: 400px;
+}
+
+#divInfosAlbum {
+    width: 500px;
+    height: 400px;
+}
+
+#divInfosAlbum h1 {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: navy;
+}
+
+#divInfosAlbum h2 {
+    margin-left: 16px;
+    font-size:20px;
+    color: navy;
+}
+
+.infoAlbum {
+    margin-top: 4px;
+    margin-left: 16px;
+    margin-bottom: 8px;
+}
+
+.contribAlbum {
+    margin-top: 4px;
+    margin-left: 24px;
+    margin-bottom: 8px;
+}
+
+#boutonAjouterAlbum {
+    width: 200px;
+    height: 48px;
+    margin-top: 16px;
+    margin-left: 150px;
+    color: white;
+    background-color: green;
+    border: solid 2px black;
+    cursor: pointer;
+}
+
+#boutonRetirerAlbum {
+    width: 200px;
+    height: 48px;
+    margin-top: 16px;
+    margin-left: 150px;
+    color: white;
+    background-color: red;
+    border: solid 2px black;
+    cursor: pointer;
+}

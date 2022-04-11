@@ -55,18 +55,23 @@ export default class DetailsAlbum extends Component {
     render() {
         return (
             <div class="divDetailsAlbum">
-                <img src={this.props.album.img}/>
+                <img id="imgDetailsAlbum" src={this.props.album.img}/>
                 <div id="divInfosAlbum">
                     <h1>{this.props.album.title}</h1>
-                    <p>Série : {this.props.album.serie}</p>
-                    <p>Numéro de série : {this.props.album.num_serie}</p>
-                    <p>ISBN : {this.props.album.isbn}</p>
+                    <h2>Série :</h2>
+                    <p class="infoAlbum">{this.props.album.serie}</p>
+                    <h2>Numéro de série :</h2>
+                    <p class="infoAlbum">{this.props.album.num_serie}</p>
+                    <h2>ISBN :</h2>
+                    <p class="infoAlbum">{this.props.album.isbn}</p>
+                    <h2>Contributeurs :</h2>
+                    {this.props.album.contributorAlbum.map(c => <p class="contribAlbum">- {c.name} ({c.role})</p>)}
                     {
                         this.props.user_id != -1 ?
                             this.isInUserCollection() ?
-                                <button onClick = {() => this.removeAlbumFromCollection()}>Retirer de ma collection</button>
+                                <button id="boutonRetirerAlbum" onClick = {() => this.removeAlbumFromCollection()}>Retirer de ma collection</button>
                                 :
-                                <button onClick = {() => this.addAlbumToCollection()}>Ajouter à ma collection</button>
+                                <button id="boutonAjouterAlbum" onClick = {() => this.addAlbumToCollection()}>Ajouter à ma collection</button>
                             :
                             null
                     }
