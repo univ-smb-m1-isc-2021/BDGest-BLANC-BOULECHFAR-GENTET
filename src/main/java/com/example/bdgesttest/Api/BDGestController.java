@@ -72,6 +72,12 @@ public class BDGestController {
         bdGestService.addUser(login, password, role);
     }
 
+    @GetMapping(value = "/api/remUser")
+    public boolean remUser(@RequestParam Long id_user) {
+        logger.info("Service remUser");
+        return bdGestService.remUser(id_user);
+    }
+
     @GetMapping(value = "/api/check")
     public BDGestUser getUser(@RequestParam String login, @RequestParam String password) {
         logger.info("Service checkUser");

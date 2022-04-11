@@ -52,6 +52,17 @@ public class BDGestService {
         }
     }
 
+    public boolean remUser(Long id_user){
+        if (bdgestRepository.existsById(id_user)){
+            Optional<BDGestUser> album = bdgestRepository.findById(id_user);
+            album.ifPresent(bdgestRepository::delete);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public BDGestUser getUser(String login) {
         return bdgestRepository.findBDGestUserByLogin(login);
     }
