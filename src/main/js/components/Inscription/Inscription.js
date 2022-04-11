@@ -22,23 +22,25 @@ export default class Inscription extends Component {
 
     render() {
         return (
-            <div id="divInscription">
-                <h1>Inscrivez-vous sur BDGest :</h1>
-                <label for="inputPseudo">Nom d'utilisateur :</label>
-                <br/>
-                <input id="inputPseudo" type="text"/>
-                <br/>
-                <label for="inputPassword">Mot de passe :</label>
-                <br/>
-                <input id="inputPassword" type="password"/>
-                <br/>
-                <select id="selectRole">
-                    <option value="none" selected disabled="true">Sélectionnez un rôle</option>
-                    <option value="Utilisateur">Utilisateur</option>
-                    <option value="Administrateur">Administrateur</option>
-                </select>
-                <br/>
-                <button onClick={() => this.inscription()}>S'inscrire</button>
+            <div id="divInscriptionWrapper">
+                <div id="divInscription">
+                    <h1>Inscription</h1>
+                    <label htmlFor="inputPseudo">Nom d'utilisateur :</label>
+                    <br/>
+                    <input id="inputPseudo" type="text"/>
+                    <br/>
+                    <label htmlFor="inputPassword">Mot de passe :</label>
+                    <br/>
+                    <input id="inputPassword" type="password"/>
+                    <br/>
+                    <select id="selectRole">
+                        <option value="none" selected disabled="true">Sélectionnez un rôle</option>
+                        <option value="Utilisateur">Utilisateur</option>
+                        <option value="Administrateur">Administrateur</option>
+                    </select>
+                    <br/>
+                    <button onClick={() => this.inscription()}>S'inscrire</button>
+                </div>
             </div>
         );
     }

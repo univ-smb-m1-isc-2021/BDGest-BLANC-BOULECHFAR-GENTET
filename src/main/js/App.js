@@ -5,6 +5,7 @@ import Catalogue from "./components/Catalogue/Catalogue.js";
 import Collection from "./components/Collection/Collection.js";
 import Connexion from "./components/Connexion/Connexion.js";
 import Inscription from "./components/Inscription/Inscription.js";
+import Profil from "./components/Profil/Profil.js";
 
 export default class App extends Component {
 
@@ -14,7 +15,8 @@ export default class App extends Component {
             currentComponent: "Accueil",
             components: {},
             user_id: -1,
-            user_login: "%null%"
+            user_login: "%null%",
+            user_role: "%null%"
         }
     }
 
@@ -25,7 +27,8 @@ export default class App extends Component {
                 "Catalogue": <Catalogue user_id={this.state.user_id} />,
                 "Collection": <Collection user_id={this.state.user_id} />,
                 "Connexion": <Connexion onLogin={this.getUserInfos} />,
-                "Inscription": <Inscription />
+                "Inscription": <Inscription />,
+                "Profil": <Profil user_id={this.state.user_id} user_login={this.state.user_login} user_role={this.state.user_role} disconnectUser={this.disconnectUser} />
             }
         })
     }
@@ -34,19 +37,21 @@ export default class App extends Component {
         this.setState({currentComponent: contentName});
     }
 
-    getUserInfos = (user_id, user_login) => {
+    getUserInfos = (user_id, user_login, user_role) => {
         this.setState({
             user_id: user_id,
             user_login: user_login,
+            user_role: user_role,
             currentComponent: "Accueil"
         });
         this.setLinks();
     }
 
-    disconnectUser() {
+    disconnectUser = () => {
         this.setState({
             user_id: -1,
             user_login: "%null%",
+            user_role: "%null%",
             currentComponent: "Accueil"
         });
         setTimeout(() => {
@@ -79,7 +84,7 @@ export default class App extends Component {
                     {
                         this.state.user_id != -1 ?
                             <ul className="listeLiens">
-                                <li>{this.state.user_login}</li>
+                                <li onClick={() => this.changeContent("Profil")}>{this.state.user_login}</li>
                                 <li onClick={() => this.disconnectUser()}>Déconnexion</li>
                             </ul>
                             :

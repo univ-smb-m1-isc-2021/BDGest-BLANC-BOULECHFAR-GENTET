@@ -1,0 +1,63 @@
+#divInscriptionWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#divInscription {
+    width: 400px;
+    height: auto;
+    background-color: rgb(250, 250, 250);
+    border: solid 3px navy;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+}
+
+#divInscription h1 {
+    margin-top: 16px;
+    margin-bottom: 32px;
+    color: navy;
+    font-size: 32px;
+    text-align: center;
+}
+
+#divInscription label {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 4px;
+    color: navy;
+    font-size: 16px;
+}
+
+#divInscription input {
+    width: 80%;
+    height: 32px;
+    margin-left: 10%;
+    margin-bottom: 16px;
+}
+
+#divInscription select {
+    width: 80%;
+    height: 32px;
+    margin-left: 10%;
+    margin-bottom: 16px;
+}
+
+#divInscription button {
+    width: 80%;
+    height: 48px;
+    margin-top: 16px;
+    margin-left: 10%;
+    margin-bottom: 16px;
+    font-size: 24px;
+    background-color: navy;
+    color: white;
+    border: solid 2px white;
+    cursor: pointer;
+}
+
+#divInscription button:hover {
+    background-color: darkblue;
+    transition: 0.2s all;
+}

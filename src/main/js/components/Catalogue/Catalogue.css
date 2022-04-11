@@ -1,6 +1,15 @@
 #listeAlbumsWrapper {
     width: 100%;
     height: 100%;
+    padding-bottom: 16px;
+}
+
+#catalogueH1 {
+    margin-bottom: 32px;
+    text-align: center;
+    font-size: 32px;
+    color: navy;
+    font-weight: bold;
 }
 
 #divBarreDeRecherche {
@@ -12,7 +21,7 @@
 }
 
 #inputRecherche {
-    width: 97%;
+    width: 96%;
     height: 99%;
     padding-left: 8px;
     border-top: solid 2px black;
@@ -22,15 +31,21 @@
     border-radius: 25px 0px 0px 25px;
 }
 
-#imageLoupe {
-    width: 32px;
-    height: 32px;
-    padding: 8px 0px 8px 0px;
+#divImageLoupe {
+    width: 4%;
+    height: 99%;
     border-top: solid 2px black;
     border-left: none;
     border-bottom: solid 2px black;
     border-right: solid 2px black;
     border-radius: 0px 25px 25px 0px;
+}
+
+#imageLoupe {
+    width: 32px;
+    height: 32px;
+    margin-top: 8px;
+    margin-right: 8px;
     cursor: pointer;
 }
 
@@ -39,23 +54,4 @@
     grid-template-columns: 200px 200px 200px 200px 200px;
     row-gap: 16px;
     justify-content: space-evenly;
-}
-
-.popupDetailsAlbum {
-    position: absolute;
-    z-index: 1;
-    width: 50%;
-    height: auto;
-    top: 30%;
-    left: 25%;
-    background-color: red;
-}
-
-#divDetailsAlbum {
-    display: flex;
-}
-
-.popupDetailsAlbum img {
-    width: 200px;
-    height: 300px;
 }

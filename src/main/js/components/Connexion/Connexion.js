@@ -13,7 +13,8 @@ export default class Connexion extends Component {
                 let user_id = response.data.id;
                 if (user_id != -1) {
                     let user_login = response.data.login;
-                    this.props.onLogin(user_id, user_login);
+                    let user_role = response.data.role;
+                    this.props.onLogin(user_id, user_login, user_role);
                 } else {
                     alert("Nom d'utilisateur ou mot de passe incorrect.")
                 }
@@ -25,17 +26,22 @@ export default class Connexion extends Component {
 
     render() {
         return (
-            <div id="divConnexion">
-                <h1>Connectez-vous sur BDGest :</h1>
-                <label for="inputPseudo">Nom d'utilisateur :</label>
-                <br/>
-                <input id="inputPseudo" type="text"/>
-                <br/>
-                <label for="inputPassword">Mot de passe :</label>
-                <br/>
-                <input id="inputPassword" type="password"/>
-                <br/>
-                <button onClick={() => {this.getUserInfos()}}>Se connecter</button>
+            <div id="divConnexionWrapper">
+                <div id="divConnexion">
+                    <h1>Connexion</h1>
+                    <label htmlFor="inputPseudo">Nom d'utilisateur :</label>
+                    <br/>
+                    <input id="inputPseudo" type="text"/>
+                    <br/>
+                    <label htmlFor="inputPassword">Mot de passe :</label>
+                    <br/>
+                    <input id="inputPassword" type="password"/>
+                    <br/>
+                    <button onClick={() => {
+                        this.getUserInfos()
+                    }}>Se connecter
+                    </button>
+                </div>
             </div>
         );
     }

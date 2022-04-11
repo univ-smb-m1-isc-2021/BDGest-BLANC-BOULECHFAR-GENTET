@@ -37,11 +37,13 @@ export default class Catalogue extends Component {
         return (
             <div id="listeAlbumsWrapper">
 
-                <h1>Catalogue :</h1>
+                <h1 id="catalogueH1">Catalogue</h1>
 
                 <div id="divBarreDeRecherche">
                     <input id="inputRecherche" type="text" placeholder="Rechercher un album par titre..."/>
-                    <img id="imageLoupe" src="./search.png"/>
+                    <div id="divImageLoupe">
+                        <img id="imageLoupe" src="./search.png"/>
+                    </div>
                 </div>
 
                 <div id="divListeAlbums">
