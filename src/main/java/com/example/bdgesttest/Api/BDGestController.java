@@ -89,6 +89,12 @@ public class BDGestController {
         return bdGestService.addAlbumToUser(id_user, id_album);
     }
 
+    @GetMapping(value = "/api/remAlbumFromUser")
+    public boolean remAlbumFromUser(@RequestParam Long id_user, @RequestParam Long id_album){
+        logger.info("Service remAlbumFromUser");
+        return bdGestService.remAlbumFromUser(id_user, id_album);
+    }
+
     @GetMapping(value = "api/albumsByUserId")
     public Set<Album> albumsByUserId(@RequestParam Long id_user){
         logger.info("Service albumsByUserId");

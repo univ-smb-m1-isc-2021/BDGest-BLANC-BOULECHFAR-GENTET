@@ -68,6 +68,18 @@ public class BDGestService {
         }
     }
 
+    public boolean remAlbumFromUser(Long id_user, Long id_album){
+        if(!albumRepository.existsById(id_album) || !bdgestRepository.existsById(id_user)){
+            return false;
+        } else {
+            Album album = albumRepository.getById(id_album);
+            BDGestUser bdGestUser = bdgestRepository.getById(id_user);
+            bdGestUser.remUserAlbum(album);
+            bdgestRepository.save(bdGestUser);
+            return true;
+        }
+    }
+
     public Set<Album> getAlbumsById(Long id_user){
         return bdgestRepository.getById(id_user).getUserAlbum();
     }

@@ -92,6 +92,10 @@ public class BDGestUser {
         this.userAlbum.add(album);
     }
 
+    public void remUserAlbum(Album album) {
+        this.userAlbum.remove(album);
+    }
+
     public void setUserAlbum(Set<Album> userAlbum) {
         this.userAlbum = userAlbum;
     }
