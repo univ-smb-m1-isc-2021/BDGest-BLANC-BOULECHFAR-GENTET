@@ -4,6 +4,7 @@ import com.example.bdgesttest.persistence.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -131,12 +132,12 @@ public class BDGestService {
     }
 
     public int scrapSerie(String url) throws IOException {
+        System.out.println("scrapSerie : " + url);
         Document doc = Jsoup.connect(url).get();
         int nb_albums_total = Integer.parseInt(doc.select("i.icon-book").first().nextSibling().toString().split(" ")[1]);
         int nb_albums_added = 0;
         String link_tome;
         Album album;
-        boolean valid;
         if(nb_albums_total > 1) {
             for (Element element : doc.select("ul.liste-albums-side > li > a")) {
                 link_tome = element.attr("href");
@@ -163,10 +164,12 @@ public class BDGestService {
         String randomLetter = String.valueOf(alphabet.charAt(random.nextInt(length))).toUpperCase();
         String url = "https://www.bedetheque.com/bandes_dessinees_" + randomLetter + ".html";
         Document doc = Jsoup.connect(url).get();
+        Elements series = doc.select("ul.nav-liste > li > a");
+        System.out.println(series.size());
         System.out.println(url);
         System.out.println("nb : " + doc.select("span.sous-titre-texte").text());
-        int nbAlbums = Integer.valueOf(doc.select("span.sous-titre-texte").text().split(" ")[0]);
-        return doc.select("ul.nav-liste > li > a").get(random.nextInt(nbAlbums)).attr("href");
+        //int nbAlbums = Integer.valueOf(doc.select("span.sous-titre-texte").text().split(" ")[0]);
+        return series.get(random.nextInt(series.size())).attr("href");
     }
 
     //scrap albums until reach max

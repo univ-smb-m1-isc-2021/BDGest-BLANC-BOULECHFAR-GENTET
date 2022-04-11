@@ -60,7 +60,7 @@ public class BDGestController {
     }
 
     @GetMapping(value = "/api/scrapNbAlbums")
-    public int scrapNbAlbums(@RequestParam int nb) throws IOException {
+    public int scrapNbAlbums(@RequestParam int nb) throws IOException, InterruptedException {
         logger.info("Service scrapNbAlbums");
         int nbScraps = bdGestService.scrapNbAlbums(nb);
         return nbScraps;
