@@ -8,13 +8,13 @@ export default class Inscription extends Component {
         let password = document.getElementById("inputPassword").value;
         let selectRole = document.getElementById("selectRole");
         let role = selectRole.options[selectRole.selectedIndex].value;
-        console.log("Salut :" + pseudo + ", " + password + ", " + role);
         if (pseudo != "" && password != "" && role != "none") {
             const axios = require("axios");
-            axios.get("/api/addUser?login=" + pseudo + "&password=" + password + "&role=" + role);
-            document.getElementById("inputPseudo").value = "";
-            document.getElementById("inputPassword").value = "";
-            selectRole.selectedIndex = 0;
+            axios.get("/api/addUser?login=" + pseudo + "&password=" + password + "&role=" + role).then(() => {
+                document.getElementById("inputPseudo").value = "";
+                document.getElementById("inputPassword").value = "";
+                selectRole.selectedIndex = 0;
+            });
         } else {
             alert("Veuillez remplir tous les champs !");
         }
