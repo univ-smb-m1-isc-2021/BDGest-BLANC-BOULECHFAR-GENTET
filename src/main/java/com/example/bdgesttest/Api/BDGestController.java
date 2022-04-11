@@ -82,4 +82,9 @@ public class BDGestController {
         }
     }
 
+    @GetMapping(value = "/api/addAlbumToUser")
+    public boolean addAlbumToUser(@RequestParam Long id_user, @RequestParam Long id_album){
+        return bdGestService.addAlbumToUser(id_user, id_album);
+    }
+
 }

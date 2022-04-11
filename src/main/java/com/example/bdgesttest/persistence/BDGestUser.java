@@ -88,6 +88,10 @@ public class BDGestUser {
         return userAlbum;
     }
 
+    public void addUserAlbum(Album album) {
+        this.userAlbum.add(album);
+    }
+
     public void setUserAlbum(Set<Album> userAlbum) {
         this.userAlbum = userAlbum;
     }

@@ -56,6 +56,18 @@ public class BDGestService {
         return bdgestRepository.findBDGestUserByLogin(login);
     }
 
+    public boolean addAlbumToUser(Long id_user, Long id_album){
+        if(!albumRepository.existsById(id_album) || !bdgestRepository.existsById(id_user)){
+            return false;
+        } else {
+            Album album = albumRepository.getById(id_album);
+            BDGestUser bdGestUser = bdgestRepository.getById(id_user);
+            bdGestUser.addUserAlbum(album);
+            bdgestRepository.save(bdGestUser);
+            return true;
+        }
+    }
+
     // Scrap an album from a given url at www.bedetheque.com
     public Album scrapAlbum(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
