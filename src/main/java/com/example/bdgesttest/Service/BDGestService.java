@@ -68,6 +68,10 @@ public class BDGestService {
         }
     }
 
+    public Set<Album> getAlbumsById(Long id_user){
+        return bdgestRepository.getById(id_user).getUserAlbum();
+    }
+
     // Scrap an album from a given url at www.bedetheque.com
     public Album scrapAlbum(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();

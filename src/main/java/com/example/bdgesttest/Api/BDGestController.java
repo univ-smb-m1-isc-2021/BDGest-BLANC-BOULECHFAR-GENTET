@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class BDGestController {
@@ -84,7 +85,14 @@ public class BDGestController {
 
     @GetMapping(value = "/api/addAlbumToUser")
     public boolean addAlbumToUser(@RequestParam Long id_user, @RequestParam Long id_album){
+        logger.info("Service addAlbumToUser");
         return bdGestService.addAlbumToUser(id_user, id_album);
+    }
+
+    @GetMapping(value = "api/albumsByUserId")
+    public Set<Album> albumsByUserId(@RequestParam Long id_user){
+        logger.info("Service albumsByUserId");
+        return bdGestService.getAlbumsById(id_user);
     }
 
 }
