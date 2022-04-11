@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import './App.css';
 import Accueil from "./components/Accueil/Accueil.js";
-import Album from "./components/Album/Album.js";
-import ListeAlbums from "./components/ListeAlbums/ListeAlbums.js";
-import DetailsAlbum from "./components/DetailsAlbum/DetailsAlbum.js";
+import Catalogue from "./components/Catalogue/Catalogue.js";
+import Collection from "./components/Collection/Collection.js";
 import Connexion from "./components/Connexion/Connexion.js";
 import Inscription from "./components/Inscription/Inscription.js";
 
@@ -16,8 +14,7 @@ export default class App extends Component {
             currentComponent: "Accueil",
             components: {},
             user_id: -1,
-            user_login: "%null%",
-            result: []
+            user_login: "%null%"
         }
     }
 
@@ -25,7 +22,8 @@ export default class App extends Component {
         this.setState({
             components: {
                 "Accueil": <Accueil />,
-                "ListeAlbums": <ListeAlbums>{this.state.result.map(a => <Album album={a}/>)}</ListeAlbums>,
+                "Catalogue": <Catalogue user_id={this.state.user_id} />,
+                "Collection": <Collection user_id={this.state.user_id} />,
                 "Connexion": <Connexion onLogin={this.getUserInfos} />,
                 "Inscription": <Inscription />
             }
@@ -37,12 +35,12 @@ export default class App extends Component {
     }
 
     getUserInfos = (user_id, user_login) => {
-        console.log("Hey : " + user_id + ", " + user_login);
         this.setState({
             user_id: user_id,
             user_login: user_login,
             currentComponent: "Accueil"
         });
+        this.setLinks();
     }
 
     disconnectUser() {
@@ -51,15 +49,14 @@ export default class App extends Component {
             user_login: "%null%",
             currentComponent: "Accueil"
         });
+        setTimeout(() => {
+            console.log(this.state.user_id);
+            this.setLinks();
+        }, 50);
     }
 
     componentWillMount() {
-        const axios = require("axios");
-        axios.get("/api/getAllAlbums")
-            .then(response => {
-                this.setState({result: response.data});
-                this.setLinks();
-            });
+        this.setLinks();
     }
 
     render() {
@@ -70,8 +67,13 @@ export default class App extends Component {
                     <h1 id="title">BDGest</h1>
                     <ul class="listeLiens">
                         <li onClick={() => this.changeContent("Accueil")}>Accueil</li>
-                        <li onClick={() => this.changeContent("ListeAlbums")}>Catalogue</li>
-                        <li onClick={() => this.changeContent("ListeAlbums")}>Ma collection</li>
+                        <li onClick={() => this.changeContent("Catalogue")}>Catalogue</li>
+                        {
+                            this.state.user_id != -1 ?
+                                <li onClick={() => this.changeContent("Collection")}>Ma collection</li>
+                                :
+                                null
+                        }
                     </ul>
                     <span id="separator"></span>
                     {

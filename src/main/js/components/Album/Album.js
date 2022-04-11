@@ -16,14 +16,12 @@ export default class Album extends Component {
     }
 
     afficherDetails() {
-        console.log("Afficher détails !");
         this.setState({
             showDetails: true
         })
     }
 
     masquerDetails() {
-        console.log("Masquer détails")
         this.setState({
             showDetails: false
         })
@@ -39,7 +37,7 @@ export default class Album extends Component {
                 {
                     this.state.showDetails ?
                         <div class="popupDetailsAlbum">
-                            <DetailsAlbum album={this.props.album}/>
+                            <DetailsAlbum album={this.props.album} user_id={this.props.user_id}/>
                             <button onClick={() => this.masquerDetails()}>Fermer</button>
                         </div>
                         :

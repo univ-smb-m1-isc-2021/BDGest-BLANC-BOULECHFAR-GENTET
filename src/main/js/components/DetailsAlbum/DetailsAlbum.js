@@ -7,6 +7,18 @@ export default class DetailsAlbum extends Component {
         super(props);
     }
 
+    addAlbumToCollection() {
+        if (this.props.user_id != -1) {
+            const axios = require("axios");
+            console.log(this.props.album);
+            axios.get("/api/addAlbumToUser?id_user=" + this.props.user_id + "&id_album=" + this.props.album.id_album).then((response) => {
+                if (response.data == false) {
+                    alert("Erreur sur l'ajout");
+                }
+            });
+        }
+    }
+
     render() {
         return (
             <div class="divDetailsAlbum">
@@ -16,7 +28,12 @@ export default class DetailsAlbum extends Component {
                     <p>Série : {this.props.album.serie}</p>
                     <p>Numéro de série : {this.props.album.num_serie}</p>
                     <p>ISBN : {this.props.album.isbn}</p>
-                    <button>Ajouter à ma collection</button>
+                    {
+                        this.props.user_id != -1 ?
+                            <button onClick = {() => this.addAlbumToCollection()}>Ajouter à ma collection</button>
+                            :
+                            null
+                    }
                     <br/>
                 </div>
             </div>
