@@ -28,7 +28,6 @@ export default class Album extends Component {
     }
 
     updateList = () => {
-        console.log("UpdateList dans Album");
         this.props.updateAlbumList();
     }
 

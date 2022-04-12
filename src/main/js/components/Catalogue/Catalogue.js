@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import "./Catalogue.css";
 import Album from "../Album/Album";
-import axios from "axios";
 
 export default class Catalogue extends Component {
 
@@ -14,7 +13,6 @@ export default class Catalogue extends Component {
     }
 
     updateList = () => {
-        console.log("UpdateList dans catalogue");
         const axios = require("axios");
         axios.get("/api/getAllAlbums")
             .then(response => {

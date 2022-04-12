@@ -25,7 +25,6 @@ export default class DetailsAlbum extends Component {
     addAlbumToCollection() {
         if (this.props.user_id != -1) {
             const axios = require("axios");
-            console.log(this.props.album);
             axios.get("/api/addAlbumToUser?id_user=" + this.props.user_id + "&id_album=" + this.props.album.id_album).then((response) => {
                 if (response.data == false) {
                     alert("Erreur sur l'ajout");

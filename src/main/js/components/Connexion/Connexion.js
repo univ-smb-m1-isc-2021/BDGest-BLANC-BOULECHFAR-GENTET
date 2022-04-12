@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import './Connexion.css';
-import axios from "axios";
 
 export default class Connexion extends Component {
 

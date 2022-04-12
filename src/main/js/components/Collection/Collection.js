@@ -13,7 +13,6 @@ export default class Collection extends Component {
     }
 
     updateList = () => {
-        console.log("UpdateList dans collection");
         if (this.props.user_id != -1) {
             axios.get("/api/albumsByUserId?id_user=" + this.props.user_id).then((response) => {
                 this.setState({
